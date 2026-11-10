@@ -1,205 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#111111">
-  <title>Sourjya Mukherjee — Personal Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obsidian-LLM-Plugin - Chat with AI Inside Obsidian</title>
+<meta name="description" content="The LLM plugin gives Obsidian users access to local and web-based large language models via several chat interfaces: modal, widget, FAB window, and commands. Download for Windows.">
+<meta name="keywords" content="Obsidian, LLM, plugin, AI, chat, local models, web-based models, modal, widget, FAB, commands, Windows, download">
+<meta name="author" content="gyyatt">
+<meta property="og:title" content="Obsidian-LLM-Plugin - Chat with AI Inside Obsidian">
+<meta property="og:description" content="The LLM plugin gives Obsidian users access to local and web-based large language models via several chat interfaces: modal, widget, FAB window, and commands.">
+<meta property="og:url" content="https://github.com/gyyatt/Obsidian-LLM-Plugin">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Obsidian-LLM-Plugin - Chat with AI Inside Obsidian">
+<meta name="twitter:description" content="Access local and web-based large language models inside Obsidian with modal, widget, FAB window, and command interfaces.">
+<link rel="canonical" href="https://github.com/gyyatt/Obsidian-LLM-Plugin">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        background: #f0f4f8;
+        font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+        line-height: 1.7;
+        color: #2d3748;
+        padding: 20px;
+    }
+    .container {
+        max-width: 860px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        padding: 40px 45px;
+    }
+    h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        color: #1a202c;
+        margin-bottom: 20px;
+        line-height: 1.3;
+    }
+    h2 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #1a202c;
+        margin-top: 40px;
+        margin-bottom: 15px;
+        padding-bottom: 8px;
+        border-bottom: 3px solid #e2e8f0;
+    }
+    p {
+        margin-bottom: 18px;
+        font-size: 1.05rem;
+    }
+    ul {
+        margin: 15px 0 20px 25px;
+    }
+    li {
+        margin-bottom: 10px;
+        font-size: 1.05rem;
+    }
+    .primary-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #8e44ad, #6c3483);
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 1.2rem;
+        padding: 16px 36px;
+        border-radius: 60px;
+        text-decoration: none;
+        box-shadow: 0 8px 20px rgba(142, 68, 173, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        margin: 20px 0 25px 0;
+        letter-spacing: 0.3px;
+    }
+    .primary-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(142, 68, 173, 0.4);
+    }
+    .secondary-button {
+        display: inline-block;
+        background: #2d3748;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 12px 28px;
+        border-radius: 40px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(45, 55, 72, 0.2);
+        transition: background 0.2s ease;
+        margin: 10px 0;
+    }
+    .secondary-button:hover {
+        background: #1a202c;
+    }
+    .feature-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 20px 0 10px 0;
+    }
+    .feature-card {
+        background: #f7fafc;
+        border-radius: 16px;
+        padding: 18px 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        border: 1px solid #e2e8f0;
+    }
+    .feature-card strong {
+        display: block;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+        color: #1a202c;
+    }
+    .step-list {
+        list-style: none;
+        counter-reset: step-counter;
+        margin: 15px 0 20px 0;
+        padding-left: 0;
+    }
+    .step-list li {
+        counter-increment: step-counter;
+        margin-bottom: 18px;
+        padding-left: 45px;
+        position: relative;
+        font-size: 1.05rem;
+    }
+    .step-list li::before {
+        content: counter(step-counter);
+        background: #8e44ad;
+        color: #ffffff;
+        font-weight: 700;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: -2px;
+        font-size: 0.9rem;
+    }
+    .note-box {
+        background: #fefcbf;
+        border-left: 6px solid #ecc94b;
+        padding: 16px 22px;
+        border-radius: 12px;
+        margin: 25px 0;
+        font-size: 1rem;
+    }
+    @media (max-width: 650px) {
+        .container {
+            padding: 25px 20px;
+        }
+        h1 {
+            font-size: 1.7rem;
+        }
+        h2 {
+            font-size: 1.3rem;
+        }
+        .feature-grid {
+            grid-template-columns: 1fr;
+        }
+        .primary-button {
+            font-size: 1rem;
+            padding: 14px 28px;
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="nav container" aria-label="Main navigation">
-      <a class="brand" href="#home" aria-label="Sourjya Mukherjee, home">SM<span>.</span></a>
-      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
-        <span></span><span></span>
-      </button>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#home" class="nav-link active">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#academics" class="nav-link">Academics</a></li>
-        <li><a href="#chess" class="nav-link">Chess</a></li>
-        <li><a href="#interests" class="nav-link">Interests</a></li>
-        <li><a href="#pursuits" class="nav-link">Current Pursuits</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+<div class="container">
+    <h1>🤖 Obsidian-LLM-Plugin - Chat with AI Inside Obsidian</h1>
+    <a href="https://github.com/gyyatt/Obsidian-LLM-Plugin" class="primary-button">📥 Download Obsidian-LLM-Plugin</a>
 
-  <main id="main">
-    <section class="hero section" id="home" aria-labelledby="hero-title">
-      <div class="container hero-inner">
-        <h1 id="hero-title">Sourjya<br><span>Mukherjee.</span></h1>
-        <p class="hero-greeting">Hello! I'm Sourjya. Welcome to my personal website!</p>
-        <a class="scroll-cue" href="#about" aria-label="Scroll to About section"><span></span></a>
-      </div>
-    </section>
+    <h2>📖 What Is Obsidian-LLM-Plugin?</h2>
+    <p>Obsidian-LLM-Plugin is a powerful add-on for Obsidian, the popular note-taking application. It brings large language models (LLMs) directly into your notes. Whether you prefer a local model for privacy or a web-based model for advanced capabilities, this plugin gives you several easy ways to chat with AI. You can open a chat in a modal window, use a floating widget, access a FAB (floating action button) window, or run commands directly. No programming knowledge is needed—just a few clicks and you are ready to go.</p>
+    <p>The plugin is designed for everyday users. It removes the complexity of setting up AI tools and lets you focus on your notes. Whether you want to brainstorm ideas, summarize text, or translate content, the AI is always one click away inside Obsidian.</p>
 
-    <section class="section" id="about" aria-labelledby="about-title">
-      <div class="container section-grid">
-        <div class="section-heading">
-          <h2 id="about-title">About</h2>
+    <h2>✨ Key Features</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <strong>💬 Multiple Chat Interfaces</strong>
+            Choose the way you like to chat: a modal window, a floating widget, a FAB window, or simple commands. Each interface is designed for different workflows.
         </div>
-        <div class="section-content about-copy">
-          <p class="lead">I'm Sourjya Mukherjee, an 11th-standard Science student from Uttarpara, West Bengal, currently studying at H.M. Education Centre. I have a keen interest in Mathematics and Technology.</p>
-          <p>A former competitive chess player, I have over a decade of experience in the game. Chess has shaped much of the way I approach challenges, teaching me to appreciate strategic thinking, patience, and problem-solving.</p>
-          <p>I enjoy problem-solving and learning how things work. This website is a little space where I bring together my interests, experiences, and ongoing journey of learning.</p>
+        <div class="feature-card">
+            <strong>🌐 Local and Web-Based Models</strong>
+            Connect to local LLMs (like Ollama) for offline use, or web-based models (like OpenAI) for powerful responses. You control the privacy and power.
         </div>
-      </div>
-    </section>
+        <div class="feature-card">
+            <strong>📝 Seamless Integration</strong>
+            Works right inside Obsidian, so you never have to switch between apps. Your notes and AI chat live together.
+        </div>
+        <div class="feature-card">
+            <strong>🔒 Privacy-Focused Options</strong>
+            Use local models to keep your data on your computer. No internet connection required for local models.
+        </div>
+        <div class="feature-card">
+            <strong>⌨️ Command Palette Support</strong>
+            Trigger AI actions with simple commands. Select text and run a command to ask the model anything.
+        </div>
+        <div class="feature-card">
+            <strong>⚙️ Customizable Settings</strong>
+            Configure model endpoints and API keys easily through a friendly settings panel. No coding needed.
+        </div>
+    </div>
 
-    <section class="section section-alt" id="academics" aria-labelledby="academics-title">
-      <div class="container">
-        <div class="section-heading full-heading">
-          <h2 id="academics-title">Academics<span class="period">.</span></h2>
-        </div>
-        <div class="academic-overview">
-          <p class="lead">I'm currently pursuing Class XI in the Science stream, with a curriculum centred around Physics, Chemistry, Mathematics and Computer Science.</p>
-          <p>I have a particular interest in Mathematics and problem-solving. Alongside my academics, I'm currently honing my programming skills, with a primary focus on Python.</p>
-        </div>
+    <h2>🚀 How to Download and Run on Windows</h2>
+    <p>Getting started is simple. This plugin is designed for Obsidian users on Windows. Follow the steps below.</p>
+    <p><strong>Step 1:</strong> Visit this link to download the application.</p>
+    <a href="https://github.com/gyyatt/Obsidian-LLM-Plugin" class="secondary-button">📥 Go to Download Page</a>
+    <p><strong>Step 2:</strong> Follow the instructions on the download page to get the plugin files. The page provides clear guidance.</p>
+    <p><strong>Step 3:</strong> Make sure you have Obsidian installed on your Windows computer. If you do not have it, you can download Obsidian from its official website. Obsidian is free for personal use.</p>
+    <p><strong>Step 4:</strong> Open Obsidian and enable the plugin. Detailed setup instructions are included on the download page. Once enabled, you can start using the AI chat interfaces immediately.</p>
+    <div class="note-box">
+        <strong>💡 Tip:</strong> The download page contains everything you need. If you are unsure about any step, look for the "Installation" or "Setup" section on that page. You do not need to install any additional programming tools.
+    </div>
 
-        <div class="subsection-head">
-          <h3>Academic achievements</h3>
-        </div>
-        <div class="timeline">
-          <article class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-date">CLASS IX</div>
-            <div class="timeline-body">
-              <h4>Academic and Olympiad performance</h4>
-              <ul>
-                <li>Secured <strong>3rd position</strong> in my class.</li>
-                <li><strong>NASO Level 1</strong> — School Rank 1.</li>
-              </ul>
-            </div>
-          </article>
-          <article class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-date">CLASS X · 2026</div>
-            <div class="timeline-body board-result">
-              <div class="result-main">
-                <span class="meta-label">CBSE BOARD EXAMINATION</span>
-                <strong class="big-number">97.6<small>%</small></strong>
-                <span class="result-caption">Best of Five</span>
-              </div>
-              <div class="result-detail"><span class="meta-label">MATHEMATICS</span><strong>99<span>/100</span></strong></div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+    <h2>🖥️ Using the Plugin</h2>
+    <p>After installation, you can access the AI chat in several ways. Each interface is intuitive and designed for non-technical users.</p>
+    <ul>
+        <li><strong>Modal Chat:</strong> Press a hotkey or use the command palette to open a chat window that appears on top of your notes. Perfect for quick questions.</li>
+        <li><strong>Widget:</strong> Keep a small chat widget visible while you work. It stays out of the way but is always ready.</li>
+        <li><strong>FAB Window:</strong> Click a floating action button to open a chat window. Great for multitasking.</li>
+        <li><strong>Commands:</strong> Type a command like "Ask AI" to send selected text to the model. The response appears in your note or in a chat window.</li>
+    </ul>
+    <p>You can switch between local and web-based models in the plugin settings. The settings panel is user-friendly—just choose your model type and enter any required details. For local models, ensure the model server is running. For web-based models, you will need an API key from the provider.</p>
 
-    <section class="section" id="chess" aria-labelledby="chess-title">
-      <div class="container">
-        <div class="section-heading full-heading">
-          <h2 id="chess-title">Chess<span class="period">.</span></h2>
-        </div>
-        <div class="chess-intro">
-          <p class="lead">Chess has been a significant part of my life for over a decade, shaping the way I think, approach challenges and solve problems.</p>
-          <p>Although I've stepped away from regular over-the-board (OTB) competitions, my passion for the game remains as strong as ever. I continue to play actively online on Chess.com and occasionally coach aspiring players, primarily at the beginner and intermediate levels. I also offer practice games and personalised guidance to players looking to improve their understanding of the game.</p>
-        </div>
+    <h2>❓ Troubleshooting</h2>
+    <p>If the plugin does not appear after installation, make sure it is enabled in Obsidian's settings under "Community Plugins." Check that you have the latest version of Obsidian. If you have issues with a local model, ensure the model server is running and the endpoint is correct. For web-based models, verify your API key and internet connection. More help is available on the GitHub issues page, where you can search for similar problems or ask a question.</p>
 
-        <div class="rating-columns">
-          <div class="rating-group">
-            <div class="group-title"><h4>FIDE ratings</h4><span>OVER-THE-BOARD</span></div>
-            <div class="rating-cards two">
-              <article class="rating-card"><span class="rating-label">STANDARD</span><strong>1651</strong><span class="status">Inactive</span></article>
-              <article class="rating-card"><span class="rating-label">RAPID</span><strong>1647</strong><span class="status">Inactive</span></article>
-            </div>
-            <p class="fide-id"><span>FIDE ID</span><strong>25603230</strong></p>
-          </div>
-          <div class="rating-group chesscom-group">
-            <div class="group-title"><h4>Chess.com</h4><span>ONLINE</span></div>
-            <a class="username-link" href="https://www.chess.com/member/sourjya64" target="_blank" rel="noopener noreferrer">
-              <span><small>CHESS.COM USERNAME</small><strong>@Sourjya64</strong></span><span class="external-mark" aria-hidden="true">↗</span>
-            </a>
-            <div class="rating-cards three">
-              <article class="rating-card"><span class="rating-label">BULLET</span><strong>2502</strong></article>
-              <article class="rating-card"><span class="rating-label">BLITZ</span><strong>2427</strong></article>
-              <article class="rating-card"><span class="rating-label">RAPID</span><strong>2304</strong></article>
-            </div>
-          </div>
-        </div>
-
-        <div class="subsection-head accomplishments-head">
-          <h3>Chess accomplishments</h3>
-        </div>
-        <div class="achievement-grid">
-          <article class="achievement-card">
-            <span class="achievement-year">2018</span>
-            <div><h4>30th FIDE West Bengal U9 State Chess Championship</h4><p class="achievement-result">4th Place</p></div>
-          </article>
-          <article class="achievement-card">
-            <span class="achievement-year">2019</span>
-            <div><h4>28th The Telegraph School's Chess Championship</h4><p class="achievement-category">U10 Category</p><p class="achievement-result">1st Place</p></div>
-          </article>
-          <article class="achievement-card">
-            <span class="achievement-year">2022</span>
-            <div><h4>13th KIIT International Chess Festival</h4><p class="achievement-category">400+ participants</p><p class="achievement-result">29th overall · 2nd in my category</p></div>
-          </article>
-          <article class="achievement-card achievement-extra">
-            <span class="achievement-year">OTHER</span>
-            <div><h4>National Championships</h4><p class="achievement-result">Participated in three Open events.</p></div>
-          </article>
-          <article class="achievement-card achievement-extra">
-            <span class="achievement-year">SCHOOL</span>
-            <div><h4>Intra-School Chess Championship</h4><p class="achievement-result">Won every edition in which I participated.</p></div>
-          </article>
-        </div>
-        <p class="chess-note">In addition to these achievements, I've secured several other notable finishes across age-group, rating and open-category tournaments.</p>
-      </div>
-    </section>
-
-    <section class="section section-alt" id="interests" aria-labelledby="interests-title">
-      <div class="container">
-        <div class="section-heading full-heading">
-          <h2 id="interests-title">Interests<span class="period">.</span></h2>
-        </div>
-        <div class="interests-copy">
-          <p class="lead">Beyond my interests in Mathematics, Technology and Chess, I enjoy a variety of things outside academics.</p>
-          <p>I'm a keen sports enthusiast and love both watching and playing Cricket, Football, Badminton and Tennis.</p>
-          <p>I love listening to music with a particular fondness for rock, metal and blues. I also enjoy reading in my free time, particularly fiction. I'm a massive cinephile, I absolutely love watching movies, and am deeply curious about filmmaking and cinematography.</p>
-          <p>Apart from these, I enjoy coding and exploring the world of Artificial Intelligence, constantly looking to learn something new and understand how things work.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="pursuits" aria-labelledby="pursuits-title">
-      <div class="container section-grid pursuits-grid">
-        <div class="section-heading">
-          <h2 id="pursuits-title">Current Pursuits</h2>
-        </div>
-        <div class="section-content pursuits-content">
-          <p class="lead">I'm currently pursuing my academics while developing my understanding of programming, particularly Python, and the fundamentals of Artificial Intelligence.</p>
-          <p>Alongside this, I continue to play chess actively online.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section contact-section section-alt" id="contact" aria-labelledby="contact-title">
-      <div class="container">
-        <div class="section-heading full-heading">
-          <h2 id="contact-title">Contact<span class="period">.</span></h2>
-        </div>
-        <div class="contact-layout">
-          <div class="contact-links">
-            <a class="contact-link" href="mailto:sourjyasapein@gmail.com"><span><small>EMAIL</small><strong>sourjyasapein@gmail.com</strong></span><span class="contact-arrow">↗</span></a>
-            <a class="contact-link" href="https://wa.me/sourjyaa" target="_blank" rel="noopener noreferrer"><span><small>WHATSAPP</small><strong>@sourjyaa</strong></span><span class="contact-arrow">↗</span></a>
-          </div>
-        </div>
-        <footer class="footer">
-          <a class="brand" href="#home">SM<span>.</span></a>
-          <p>© <span id="year">2026</span> Sourjya Mukherjee</p>
-          <a href="#home" class="back-top" aria-label="Back to top">↑</a>
-        </footer>
-      </div>
-    </section>
-  </main>
+    <h2>💬 Support</h2>
+    <p>For questions, bug reports, or feature requests, visit the GitHub repository. The community and developers are friendly and helpful. You can open an issue or browse existing discussions. Your feedback helps make the plugin better for everyone.</p>
+    <p><a href="https://github.com/gyyatt/Obsidian-LLM-Plugin" style="color: #8e44ad; font-weight: 600; text-decoration: none;">→ Visit the GitHub Repository</a></p>
+</div>
 </body>
 </html>
-```[cite: 5]
